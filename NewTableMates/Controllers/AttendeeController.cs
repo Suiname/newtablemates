@@ -13,44 +13,44 @@ using NewTableMates.Models;
 
 namespace NewTableMates.Controllers
 {
-    public class UserController : ApiController
+    public class AttendeeController : ApiController
     {
         private TableMatesContext db = new TableMatesContext();
 
-        // GET: api/User
-        public IQueryable<User> GetUsers()
+        // GET: api/Attendee
+        public Attendee[] GetAttendees()
         {
-            return db.Users;
+            return db.Attendees.ToArray();
         }
 
-        // GET: api/User/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(string id)
+        // GET: api/Attendee/5
+        [ResponseType(typeof(Attendee))]
+        public IHttpActionResult GetAttendee(string id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Attendee attendee = db.Attendees.Find(id);
+            if (attendee == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(attendee);
         }
 
-        // PUT: api/User/5
+        // PUT: api/Attendee/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(string id, User user)
+        public IHttpActionResult PutAttendee(string id, Attendee attendee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.username)
+            if (id != attendee.username)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(attendee).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace NewTableMates.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!AttendeeExists(id))
                 {
                     return NotFound();
                 }
@@ -71,16 +71,16 @@ namespace NewTableMates.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/User
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        // POST: api/Attendee
+        [ResponseType(typeof(Attendee))]
+        public IHttpActionResult PostAttendee(Attendee attendee)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.Attendees.Add(attendee);
 
             try
             {
@@ -88,7 +88,7 @@ namespace NewTableMates.Controllers
             }
             catch (DbUpdateException)
             {
-                if (UserExists(user.username))
+                if (AttendeeExists(attendee.username))
                 {
                     return Conflict();
                 }
@@ -98,23 +98,23 @@ namespace NewTableMates.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = user.username }, user);
+            return CreatedAtRoute("DefaultApi", new { id = attendee.username }, attendee);
         }
 
-        // DELETE: api/User/5
-        [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(string id)
+        // DELETE: api/Attendee/5
+        [ResponseType(typeof(Attendee))]
+        public IHttpActionResult DeleteAttendee(string id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            Attendee attendee = db.Attendees.Find(id);
+            if (attendee == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.Attendees.Remove(attendee);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(attendee);
         }
 
         protected override void Dispose(bool disposing)
@@ -126,9 +126,9 @@ namespace NewTableMates.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(string id)
+        private bool AttendeeExists(string id)
         {
-            return db.Users.Count(e => e.username == id) > 0;
+            return db.Attendees.Count(e => e.username == id) > 0;
         }
     }
 }

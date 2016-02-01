@@ -21,6 +21,6 @@ namespace NewTableMates.Models
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime AppointmentDate { get; set; }
 
-        public virtual User[] Users { get; set; }
+        public virtual Attendee[] Attendees { get; set; }
     }
 }

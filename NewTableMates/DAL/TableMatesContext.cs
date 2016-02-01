@@ -14,7 +14,7 @@ namespace NewTableMates.DAL
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Attendee> Attendees { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace NewTableMates.Models
 {
-    public class User
+    public class Attendee
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]

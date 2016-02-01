@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,6 +9,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
+using System.Web.Mvc;
 using NewTableMates.DAL;
 using NewTableMates.Models;
 
@@ -18,9 +21,9 @@ namespace NewTableMates.Controllers
         private TableMatesContext db = new TableMatesContext();
 
         // GET: api/Appointment
-        public IQueryable<Appointment> GetAppointments()
+        public Appointment[] GetAppointments()
         {
-            return db.Appointments;
+            return db.Appointments.ToArray();
         }
 
         // GET: api/Appointment/5

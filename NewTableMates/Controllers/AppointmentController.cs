@@ -134,8 +134,16 @@ namespace NewTableMates.Controllers
             //    db.SaveChanges();
             //}
             var appointment = db.Appointments.Single(p => p.ID == id);
-            appointment.Attendees.Add(db.Attendees.Find(attendeeName));
-            db.SaveChanges();
+            var attendee = db.Attendees.Single(a => a.username == attendeeName);
+            if (appointment.Attendees.Contains(attendee))
+            {
+                
+            }
+            else
+            {
+                appointment.Attendees.Add(attendee);
+                db.SaveChanges();
+            }
             return Ok(appointment);
         }
 

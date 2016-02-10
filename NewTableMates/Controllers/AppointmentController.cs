@@ -17,7 +17,7 @@ using NewTableMates.Models;
 
 namespace NewTableMates.Controllers
 {
-    [EnableCors(origins: "http://tablemates.centralus.cloudapp.azure.com/,http://thambone.us.to", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://tablemates.centralus.cloudapp.azure.com/,http://thambone.us.to", headers: "*", methods: "*", exposedHeaders: "Access-Control-Allow-Origin")]
 
     public class AppointmentController : ApiController
     {

@@ -8,11 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 using NewTableMates.DAL;
 using NewTableMates.Models;
 
 namespace NewTableMates.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AttendeeController : ApiController
     {
         private TableMatesContext db = new TableMatesContext();

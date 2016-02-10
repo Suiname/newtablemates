@@ -10,12 +10,15 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Results;
+using System.Web.Http.Cors;
 using System.Web.Mvc;
 using NewTableMates.DAL;
 using NewTableMates.Models;
 
 namespace NewTableMates.Controllers
 {
+    [EnableCors(origins: "http://tablemates.centralus.cloudapp.azure.com/,http://thambone.us.to", headers: "*", methods: "*")]
+
     public class AppointmentController : ApiController
     {
         private TableMatesContext db = new TableMatesContext();

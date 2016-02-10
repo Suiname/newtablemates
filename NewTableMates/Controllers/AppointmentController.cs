@@ -17,23 +17,16 @@ using NewTableMates.Models;
 
 namespace NewTableMates.Controllers
 {
-    [EnableCors(origins: "http://tablemates.centralus.cloudapp.azure.com/,http://thambone.us.to", headers: "*", methods: "*", exposedHeaders: "Access-Control-Allow-Origin")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
 
     public class AppointmentController : ApiController
     {
         private TableMatesContext db = new TableMatesContext();
 
         // GET: api/Appointment
-        public HttpResponseMessage GetAppointments()
+        public Appointment[] GetAppointments()
         {
-            var resp = new HttpResponseMessage()
-            {
-                Content = new StringContent(db.Appointments.ToString())
-            };
-            resp.Headers.Add("Access-Control-Allow-Origin", "*");
-            return resp;
-
-
+            return db.Appointments.ToArray();
         }
 
         // GET: api/Appointment/5

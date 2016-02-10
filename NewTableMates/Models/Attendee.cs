@@ -13,6 +13,5 @@ namespace NewTableMates.Models
         [Key]
         public string username { get; set; }
         public string email { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
     }
 }

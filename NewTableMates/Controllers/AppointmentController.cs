@@ -107,28 +107,34 @@ namespace NewTableMates.Controllers
 
             return Ok(appointment);
         }
-
+        [ResponseType(typeof(Appointment))]
         public IHttpActionResult PutAttend(int id, string attendeeName)
         {
-            Appointment appointment = db.Appointments.Find(id);
-            if (appointment == null)
-            {
-                return NotFound();
-            }
-            var attendee = new Attendee[1];
-            attendee[0] = db.Attendees.Find(attendeeName);
-            if (attendee[0] == null)
-            {
-                return NotFound();
-            }
-            if (db.Appointments.Find(id).Attendees == null)
-            {
-                db.Appointments.Find(id).Attendees = attendee;
-            }
-            else
-            {
-                db.Appointments.Find(id).Attendees.Concat(attendee);
-            }
+            //Appointment appointment = db.Appointments.Find(id);
+            //if (appointment == null)
+            //{
+            //    return NotFound();
+            //}
+            //var attendee = new Attendee[1];
+            //attendee[0] = db.Attendees.Find(attendeeName);
+            //if (attendee[0] == null)
+            //{
+            //    return NotFound();
+            //}
+            //if (db.Appointments.Find(id).Attendees == null)
+            //{
+            //    appointment.Attendees = attendee;
+            //    db.Entry(appointment).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+            //else
+            //{
+            //    appointment.Attendees.Concat(attendee);
+            //    db.Entry(appointment).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //}
+            var appointment = db.Appointments.Single(p => p.ID == id);
+            appointment.Attendees.Add(db.Attendees.Find(attendeeName));
             db.SaveChanges();
             return Ok(appointment);
         }

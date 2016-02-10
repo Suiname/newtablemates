@@ -24,9 +24,16 @@ namespace NewTableMates.Controllers
         private TableMatesContext db = new TableMatesContext();
 
         // GET: api/Appointment
-        public Appointment[] GetAppointments()
+        public HttpResponseMessage GetAppointments()
         {
-            return db.Appointments.ToArray();
+            var resp = new HttpResponseMessage()
+            {
+                Content = new StringContent(db.Appointments.ToString())
+            };
+            resp.Headers.Add("Access-Control-Allow-Origin", "*");
+            return resp;
+
+
         }
 
         // GET: api/Appointment/5

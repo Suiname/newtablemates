@@ -108,6 +108,31 @@ namespace NewTableMates.Controllers
             return Ok(appointment);
         }
 
+        public IHttpActionResult PutAttend(int id, string attendeeName)
+        {
+            Appointment appointment = db.Appointments.Find(id);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+            var attendee = new Attendee[1];
+            attendee[0] = db.Attendees.Find(attendeeName);
+            if (attendee[0] == null)
+            {
+                return NotFound();
+            }
+            if (db.Appointments.Find(id).Attendees == null)
+            {
+                db.Appointments.Find(id).Attendees = attendee;
+            }
+            else
+            {
+                db.Appointments.Find(id).Attendees.Concat(attendee);
+            }
+            db.SaveChanges();
+            return Ok(appointment);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
